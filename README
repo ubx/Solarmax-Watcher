@@ -1,0 +1,50 @@
+###########################################################################
+###                                                                     ###
+###                   S O L A R M A X   W A T C H E R                   ###
+###              graphical display for Solarmax inverters               ###
+###                                                                     ###
+###########################################################################
+
+Author and license
+------------------
+
+A simple solarmax visualizer php program written by zagibu <zagibu@gmx.ch> in July 2010
+This program was originally licensed under WTFPL 2 http://sam.zoy.org/wtfpl/
+Improvements and enhancements by Frank Lassowski <flassowski@gmx.de> in August/September 2010
+Further improvements by sleepprogger <wwrStuff@gmx.de> in January 2012
+This program is now relicensed under GPLv2 or later http://www.gnu.org/licenses/gpl2.html
+
+
+Installation and configuration
+------------------------------
+
+See INSTALL file.
+
+ 
+How it works
+------------
+
+This logging solution is composed of two main parts. The first part is the smw-logger, which reads the
+figures over ethernet from the Solarmax inverters. It's written in "C" and works as a deamon during the day.
+
+The second part is a php programm to visualize all the data, which were collected by the smw-logger.
+
+
+ToDo-list
+---------
+
+Improvements and planed bug-fixes for the future:
+
+- improvements for better use with more than one inverter
+- addition of an init.d-script to handle the activation of the logger in collaboration with an watchdog-script
+
+
+Contributors
+------------
+
+zagibu					zagibu@gmx.ch
+Frank Lassowski			flassowski@gmx.de
+Stephan Collet			stephan@collet-online.de
+Rene Essink				supergudrun@web.de
+Thomas Kattenbeck		kattenbeck@gmx.de
+sleepprogger			wwrStuff@gmx.de

@@ -1,0 +1,57 @@
+#!/bin/bash
+#
+# Solarmax-logger This scripts starts Solarmax logger.
+#
+### BEGIN INIT INFO
+# Provides:       solarmax-logger
+# Required-Start: $remote_fs $mysql $network
+# Required-Stop: $remote_fs
+# Default-Start:  2 3 4 5
+# Default-Stop: 0 1 6
+# Description:   Solarmax-logger reads data from Solarmax photovoltaic inverters
+### END INIT INFO
+#
+# written by Rene Essink supergudrun@web.de in October 2010
+#
+### START DER VARIABLEN-BESCHREIBUNG
+#
+bin=/usr/local/bin/smw-logger
+conf=/usr/local/etc/smw-logger.conf
+errorfile=/var/log/solarmax-error.log
+debugfile=/var/log/solarmax-debug.log
+#
+### ENDE DER VARIABLEN-BESCHREIBUNG
+
+case "$1" in
+	start)
+		echo -n " Starting Solarmax-logger daemon ... "
+		mv -f $errorfile $errorfile.prev >/dev/null 2>&1
+		touch $errorfile
+      if [ `cat $conf|grep -c 'debug=1'` -eq 1 ]; then
+		  mv -f $debugfile $debugfile.prev >/dev/null 2>&1
+		  touch $debugfile
+      fi
+		$bin $conf &
+		if [ $? = 0 ]; then
+		  echo -e "\033[49;1;32mdone\033[0m"
+		else
+		  echo -e "\033[49;1;31mfailed\033[0m"
+		fi
+		;;
+	stop)
+		echo -n " Stopping Solarmax-logger daemon ... "
+		killall $bin
+		if [ $? = 0 ]; then
+		  echo -e "\033[49;1;32mdone\033[0m"
+		else
+		  echo -e "\033[49;1;31mfailed\033[0m"
+		fi
+		;;
+	restart)
+		$0 stop
+		$0 start
+		;;
+	*)
+		echo "Usage: $0 {start|stop|restart}"
+		;;
+esac

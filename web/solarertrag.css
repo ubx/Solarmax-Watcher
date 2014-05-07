@@ -1,0 +1,125 @@
+/* Layout für Solarmax Watcher written by Frank Lassowski flassowski@gmx.de in August 2010
+   Licensed under GPLv2 or later http://www.gnu.org/licenses/gpl2.html */
+body {
+	font-family: sans-serif;
+	font-size: 0.7em;
+	background: #80806e;
+	color: #404040;
+}
+
+#wrap {
+	background: #ffffff;
+	color: #404040;
+	margin: 0 auto;
+	width: 820px;
+}
+
+table {
+	background-color: #DDDDDD;
+	width: 100%;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+p {
+	font-family: sans-serif;
+	font-size: 1.2em;
+	font-weight: bold;
+	text-align: center;
+}
+
+sub {
+	font-family: sans-serif;
+	font-size: 0.6em;
+}
+
+.right {
+	text-align: right;
+	vertical-align: middle;
+	padding-right: 20px;
+}
+
+.right2 {
+	text-align: right;
+	vertical-align: middle;
+	padding-right: 60px;
+}
+
+.left {
+	text-align: left;
+	vertical-align: middle;
+	padding-left: 20px;
+}
+
+/******** Header ********/
+#header {
+	font: Verdana, Tahoma, Arial, sans-serif;
+	background: url(img/header.jpg) top center repeat-x;
+	height: 121px;
+}
+
+#header h1 {
+	font-size: 35px;
+	font-weight: normal;
+	letter-spacing: 1.0px;
+	color: #cdd5ea;
+	padding: 25px 0px 0px 25px;
+	text-align: left;
+}
+
+#header h1 a {
+	position: relative;
+	top: -5px;
+	left: 5px;
+	color: #cdd5ea;
+	text-decoration: none;
+}
+
+#header h1 a:hover {
+	color: #add1ea;
+}
+
+#header h5 a {
+	position: relative;
+	top: -26px;
+	left: 7px;
+	color: #ffffff;
+	margin: 0 0 0 25px;
+	font-size: 1.1em;
+	letter-spacing: 0.1px;
+	text-align: left;
+	text-decoration: none;
+}
+
+#header h5 a:hover {
+	color: #add1ea;
+}
+
+/***** Footer *****/
+#footer {
+	clear: both;
+	margin: 0 auto;
+	padding: 2px 0;
+	border-top: 2px solid #f0f0f0;
+	width: 820px;
+	text-align: center;
+	color: #808080;
+	background: #ffffff;
+}
+
+#footer p {
+	font-size: 0.6em;
+	margin: 0;
+	padding: 0;
+}
+
+#footer a {
+	color: #808080;
+	background-color: #ffffff;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+#footer a:hover {
+	text-decoration: underline;
+}

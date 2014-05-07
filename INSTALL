@@ -1,0 +1,104 @@
+Please find here the installation instructions for the "Solarmax Watcher"
+=========================================================================
+
+
+1. The smw-logger
+=============
+
+
+Requirements
+------------
+
+mysql client library (libmysqlclient-dev)
+a running mysql-server
+
+Download the ZIP archiv and extract the file
+--------------------------------------------
+
+gunzip < Solarmax-Watcher-MT2.tar.gz | tar xvf -
+
+Compiling Instructions
+----------------------
+
+- change into the logger-folder of this archiv
+- compile with: 
+  gcc -W -Wall -Wextra -Wshadow -Wlong-long -Wformat -Wpointer-arith -rdynamic -pedantic-errors -std=c99 -o smw-logger smw-logger.c -lmysqlclient
+
+
+Running
+-------
+
+- run install.sh script to install and configure the complete software by typing
+
+  ./install.sh
+
+or install manually ...
+
+- edit and execute the 'bin/create_db.sh'-script of this archive to create the mysql-db and the
+  required tables. If more than one inverter should be logged, you have to repead executing the
+  script with diffrent table-names (log1, log2 etc.)
+- copy the logger to the prefered path, e. g. /usr/local/bin/
+- edit the config-file and copy it to the prefered path, e. g. /usr/local/etc/
+- edit init.d-script, copy it into the /etc/init.d/ - folder and make it startable.
+- Run with: /etc/init.d/solarmax-logger start
+
+It is recommended to schedule the logger to be started between 5:00 - 6:00 in the morning and
+stopped between 22:00 and 23:00 in the evening (compare with sunshine duration). The logger
+has no built-in facility for logging, so use CRON or similar. I use the following CRON entries:
+
+    00 05 * * * /etc/init.d/solarmax-logger start
+    00 23 * * * /etc/init.d/solarmax-logger stop
+
+If more than one inverter is installed, connect the 1st one with your LAN and set it to ID 001.
+The others have to be connected via RS485 in ROW, with ascending ID's (002, 003 ...) and disabled
+LAN interface.
+
+If you want to unistall the software either in parts or complete you can run the uninstall script by typing
+
+./Solarmax_uninstaller.sh
+
+with root rights. It guides you through the options of uninstalling.
+
+
+2. The virtualizer
+==================
+
+
+Requirements
+------------
+
+- A running web-server (e. g. apache2) with installed and enabled php and gd (e. g. php5 php5-gd php5-mysql)
+- The above mentioned SolarMax logger should work well, without errors
+
+
+Installation
+------------
+
+Copy all files from the "web-folder" of this archive to a new folder of the www-section of your web-server, which is typically '/var/www/' 
+or /srv/www/htdocs/'
+
+Change the following settings in the mentioned php-files:
+  1. Line 54 in 'solarertrag.php': exchange 'host', 'user' and 'password' against the values that you need to get access to your solarmax database.
+  2. '...predictions.php': enter the appropriate values for the location of your photovoltaic system.
+  3. You don't like the title image? Ok, make your own, dimensions should be 820 on 120 pixels. Name it 'header.jpg' and put it in the 
+     directory 'img/'. Or search for 'header.jpg' in 'solarertrag.css' and change this filename to what you need.
+  4. The colors of the graphs are quite ugly? Look at 'colors.php' and enter your favorite HTML color values.
+  5. In 'sitehead.php' you can change the title, the subtitle and the associated links of the page.
+  6. At least you should change $maxpac in 'drawday.php' to a value which is a little bit higher than the kWp of your photovoltaic system.
+  7. The remuneration for my PV system is 0,3405 EUR per kWh. If your milage varies change it in 'solarertrag.php' end of line 297.
+
+
+Usage
+-----
+
+Now you can call 'solarertrag.php' in your browser and look forward for the money coming in :-)
+
+The php script examines the preferred language of the used browser and shows the pages text automatically in this language if there's a 
+translation for it. If no translation is available, the english version is shown.
+
+If you want to monitor more than one inverter you have to name your databases tables with numbers after 'log', e.g. 'log1', 'log2' etc. (see above). 
+Add links for the inverters in 'sitehead.php' like 
+  
+  http://yourwebadress/solarertrag.php?wr=x
+
+where x is the number of the inverter. Call the page with: http://yourwebadress/solarertrag.php?wr=x 
