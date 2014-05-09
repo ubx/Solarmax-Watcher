@@ -10,5 +10,5 @@ todo
 ====
 * Make device type configurable
 * Eliminate BuildCommandMessage.c, integrate it in smw-logger.c
-* Display in month and year graph total kWh in the same as in day display
+* Display in month and year graph total kWh in the same manner as in day display
 
