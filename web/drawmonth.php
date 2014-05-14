@@ -110,6 +110,9 @@
 			imagefttext($image, 7, 0, $width - ($width * 2 / 4) +25, $height - 12, $black, $fontfile, $GLOBALS["graphmonth3".$GLOBALS['lang']]);
 		}
 
+        imagefilledrectangle($image, $width - 140, 0,  $width - 60, 20, $white);
+        imagefttext($image, 10, 0, $width - 140, 10, $black, $fontfile, $sum . " kWh");
+
 		imagepng($image, $image_name);
 		imagedestroy($image);
 		return '<p>' . $GLOBALS["graphmonth1".$GLOBALS['lang']] . '</p>';

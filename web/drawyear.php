@@ -67,9 +67,13 @@
 				imagefttext($image, 8, 0, $xpos - 4, $height - $gap + 28, $black, $fontfile, $i);
 			}
 		}
-		// Draw kdy values
+
+        // Initialize kdm image
+        $sum=0;
+        // Draw kdy values
 		while($row = mysql_fetch_assoc($result)) {
-			// Determine x position
+            $sum = $sum + $row['kmt'];
+            // Determine x position
 			$xpos = $row['month'] * $px_per_month - $px_per_month / 2;
 			// Transform kWh to pixel height
 			$kwh = $row['kmt'] / $step_w * $vert_px;
@@ -87,6 +91,9 @@
 				}
 			}
 		}
+
+        imagefilledrectangle($image, $width - 160, 0,  $width - 60, 25, $white);
+        imagefttext($image, 10, 0, $width - 145, 20, $black, $fontfile, $sum . " kWh");
 
 		//explain colored lines
 		imageline($image, $width - ($width * 2 / 4) - 55, $height - 15, $width - ($width * 2 / 4) - 70, $height - 15, $blue);
